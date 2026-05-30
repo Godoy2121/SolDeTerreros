@@ -5,14 +5,6 @@ import { messagingPromise, db } from '../firebase';
 import toast from 'react-hot-toast';
 
 const LS_KEY = 'fcm_token';
-const FCM_SW = '/firebase-messaging-sw.js';
-
-async function getFcmSwReg() {
-  // Registrar siempre el SW de FCM explícitamente para no mezclar con el SW del PWA
-  const reg = await navigator.serviceWorker.register(FCM_SW);
-  await navigator.serviceWorker.ready;
-  return reg;
-}
 
 export function useNotifications() {
   const [permiso, setPermiso] = useState(
@@ -22,68 +14,89 @@ export function useNotifications() {
   const [cargando, setCargando] = useState(false);
 
   const suscribirse = async () => {
-    const messaging = await messagingPromise;
-    if (!messaging) {
-      toast.error('Las notificaciones no están disponibles en este navegador.');
+    if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+      toast.error('Tu navegador no soporta notificaciones push.');
       return;
     }
 
     setCargando(true);
     try {
+      // 1. Pedir permiso PRIMERO (iOS exige que sea la primera llamada async)
       const permission = await Notification.requestPermission();
       setPermiso(permission);
       if (permission !== 'granted') {
         toast.error('Permiso de notificaciones denegado.');
+        setCargando(false);
         return;
       }
 
-      // Usar siempre el SW de FCM específico (no el del PWA)
-      const fswReg = await getFcmSwReg();
+      const messaging = await messagingPromise;
+      if (!messaging) {
+        toast.error('FCM no disponible en este navegador.');
+        setCargando(false);
+        return;
+      }
 
-      // Cancelar suscripción push anterior para evitar conflicto de VAPID key
-      const subAnterior = await fswReg.pushManager.getSubscription();
-      if (subAnterior) await subAnterior.unsubscribe();
+      // 2. Cancelar TODAS las suscripciones push existentes en cualquier SW
+      const swRegs = await navigator.serviceWorker.getRegistrations();
+      for (const reg of swRegs) {
+        const sub = await reg.pushManager.getSubscription().catch(() => null);
+        if (sub) await sub.unsubscribe().catch(() => {});
+      }
 
+      // 3. Registrar el SW de FCM explícitamente
+      await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+      await navigator.serviceWorker.ready;
+
+      // 4. Obtener token FCM (Firebase busca /firebase-messaging-sw.js automáticamente)
       const token = await getToken(messaging, {
         vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
-        serviceWorkerRegistration: fswReg,
       });
 
-      if (token) {
-        await setDoc(doc(db, 'suscriptores', token), {
-          token,
-          createdAt: new Date().toISOString(),
-          userAgent: navigator.userAgent,
-        });
-        localStorage.setItem(LS_KEY, token);
-        setSuscrito(true);
-        toast.success('¡Notificaciones activadas!', { icon: '🏖️', duration: 4000 });
+      if (!token) {
+        toast.error('No se pudo obtener el token. Comprueba la conexión.');
+        return;
       }
+
+      // 5. Guardar token en Firestore y localStorage
+      await setDoc(doc(db, 'suscriptores', token), {
+        token,
+        createdAt: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+      });
+      localStorage.setItem(LS_KEY, token);
+      setSuscrito(true);
+      toast.success('¡Notificaciones activadas!', { icon: '🏖️', duration: 4000 });
+
     } catch (err) {
-      console.error('Error al suscribirse:', err);
-      toast.error('No se pudo activar las notificaciones. Inténtalo de nuevo.');
+      console.error('[FCM] Error al suscribirse:', err);
+      // Mostrar error específico para poder diagnosticar
+      const msg = err?.message || err?.code || 'Error desconocido';
+      toast.error(`Error: ${msg}`, { duration: 6000 });
     } finally {
       setCargando(false);
     }
   };
 
   const desuscribirse = async () => {
-    const messaging = await messagingPromise;
     setCargando(true);
     try {
       const token = localStorage.getItem(LS_KEY);
       if (token) {
         await deleteDoc(doc(db, 'suscriptores', token)).catch(() => {});
+        const messaging = await messagingPromise;
         if (messaging) await deleteToken(messaging).catch(() => {});
-        const fswReg = await getFcmSwReg();
-        const sub = await fswReg.pushManager.getSubscription();
-        if (sub) await sub.unsubscribe();
+        const swRegs = await navigator.serviceWorker.getRegistrations();
+        for (const reg of swRegs) {
+          const sub = await reg.pushManager.getSubscription().catch(() => null);
+          if (sub) await sub.unsubscribe().catch(() => {});
+        }
       }
       localStorage.removeItem(LS_KEY);
       setSuscrito(false);
       toast('Notificaciones desactivadas.', { icon: '🔕' });
     } catch (err) {
-      console.error('Error al desuscribirse:', err);
+      console.error('[FCM] Error al desuscribirse:', err);
     } finally {
       setCargando(false);
     }
