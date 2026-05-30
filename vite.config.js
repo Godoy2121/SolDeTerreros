@@ -62,7 +62,8 @@ self.addEventListener('notificationclick', (event) => {
         manifest: {
           name: 'Sol de Terreros',
           short_name: 'Sol Terreros',
-          description: 'Tu guía de verano en San Juan de Los Terreros. Playas, restaurantes y eventos.',
+          description: 'Tu guía de verano en San Juan de Los Terreros v1.0.2. Playas, restaurantes y eventos.',
+          version: '1.0.2',
           theme_color: '#F97316',
           background_color: '#fffbf7',
           display: 'standalone',
