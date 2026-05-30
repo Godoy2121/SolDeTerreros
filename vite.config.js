@@ -7,8 +7,8 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   function swContent() {
-    return `importScripts('https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js');
+    return `importScripts('https://www.gstatic.com/firebasejs/11.3.0/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/11.3.0/firebase-messaging-compat.js');
 
 firebase.initializeApp({
   apiKey: "${env.VITE_FIREBASE_API_KEY}",
