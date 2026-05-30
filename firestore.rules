@@ -3,20 +3,31 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Lectura pública para todos
+    // Playas, restaurantes y eventos: lectura pública, escritura solo admin autenticado
     match /playas/{id} {
       allow read: if true;
       allow write: if request.auth != null;
     }
-
     match /restaurantes/{id} {
       allow read: if true;
       allow write: if request.auth != null;
     }
-
     match /eventos/{id} {
       allow read: if true;
       allow write: if request.auth != null;
+    }
+
+    // Suscriptores FCM: cualquier usuario puede registrar/actualizar su token,
+    // solo el admin autenticado puede leer (para contar suscriptores)
+    match /suscriptores/{token} {
+      allow write: if true;
+      allow read: if request.auth != null;
+    }
+
+    // Notificaciones: solo el admin autenticado puede crear,
+    // la Cloud Function usa Admin SDK (bypassa estas reglas)
+    match /notificaciones/{id} {
+      allow read, write: if request.auth != null;
     }
   }
 }
