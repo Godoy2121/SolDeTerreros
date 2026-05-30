@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { Phone, Bus, Plane, Building2, AlertTriangle, Car, ExternalLink, Clock } from 'lucide-react';
+import { Phone, Bus, Plane, Building2, AlertTriangle, Car, ExternalLink, Clock, Bell, BellOff } from 'lucide-react';
+import { useNotifications } from '../hooks/useNotifications';
 
 const secciones = [
   {
@@ -177,6 +178,75 @@ function ContactoCard({ contacto, colorClass }) {
   );
 }
 
+function NotificacionesCard() {
+  const { permiso, suscrito, cargando, suscribirse, desuscribirse } = useNotifications();
+
+  const isDenied = permiso === 'denied';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white rounded-2xl shadow-sm border border-orange-100 overflow-hidden"
+    >
+      <div className="bg-orange-50 px-5 py-4 flex items-center gap-3 border-b border-orange-100">
+        <div className="w-9 h-9 bg-orange-100 rounded-xl flex items-center justify-center">
+          <Bell className="w-5 h-5 text-orange-600" />
+        </div>
+        <h2 className="font-bold text-gray-900">Notificaciones</h2>
+      </div>
+      <div className="px-5 py-4">
+        {isDenied ? (
+          <div className="space-y-3">
+            <p className="text-sm text-gray-600">
+              Las notificaciones están <strong>bloqueadas</strong> en tu navegador. Para activarlas:
+            </p>
+            <ol className="text-sm text-gray-600 space-y-1 list-decimal list-inside leading-relaxed">
+              <li>Pulsa el <strong>🔒 candado</strong> en la barra de dirección</li>
+              <li>Busca <strong>Notificaciones</strong> → cámbialo a <strong>Permitir</strong></li>
+              <li>Recarga la página y vuelve aquí</li>
+            </ol>
+          </div>
+        ) : suscrito ? (
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-green-700">✅ Notificaciones activas</p>
+              <p className="text-xs text-gray-500 mt-0.5">Recibirás avisos de eventos, playas y novedades.</p>
+            </div>
+            <button
+              onClick={desuscribirse}
+              disabled={cargando}
+              className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-xl text-xs font-medium text-gray-600 hover:bg-gray-50 disabled:opacity-60 transition-colors"
+            >
+              {cargando
+                ? <div className="w-3 h-3 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+                : <BellOff className="w-3.5 h-3.5" />}
+              Desactivar
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-medium text-gray-900">Recibe novedades al instante</p>
+              <p className="text-xs text-gray-500 mt-0.5">Eventos, playas y actualizaciones de la app.</p>
+            </div>
+            <button
+              onClick={suscribirse}
+              disabled={cargando}
+              className="flex items-center gap-1.5 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-semibold disabled:opacity-60 transition-colors flex-shrink-0"
+            >
+              {cargando
+                ? <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                : <Bell className="w-4 h-4" />}
+              Activar
+            </button>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Info() {
   return (
     <div className="min-h-screen bg-[#fffbf7]">
@@ -221,6 +291,8 @@ export default function Info() {
             </motion.div>
           );
         })}
+
+        <NotificacionesCard />
 
         <p className="text-center text-xs text-gray-400 pb-4">
           Información orientativa. Verifica horarios y precios antes de usar los servicios.

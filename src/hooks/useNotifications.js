@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { getToken, onMessage } from 'firebase/messaging';
-import { doc, setDoc } from 'firebase/firestore';
+import { getToken, onMessage, deleteToken } from 'firebase/messaging';
+import { doc, setDoc, deleteDoc } from 'firebase/firestore';
 import { messagingPromise, db } from '../firebase';
 import toast from 'react-hot-toast';
+
+const LS_KEY = 'fcm_token';
 
 export function useNotifications() {
   const [permiso, setPermiso] = useState(
     typeof Notification !== 'undefined' ? Notification.permission : 'default'
   );
-  const [suscrito, setSuscrito] = useState(false);
+  const [suscrito, setSuscrito] = useState(() => !!localStorage.getItem(LS_KEY));
   const [cargando, setCargando] = useState(false);
 
   const suscribirse = async () => {
@@ -27,8 +29,16 @@ export function useNotifications() {
         return;
       }
 
+      // Cancelar suscripción push anterior para evitar conflicto de VAPID key
+      const swReg = await navigator.serviceWorker.ready;
+      const subAnterior = await swReg.pushManager.getSubscription();
+      if (subAnterior) {
+        await subAnterior.unsubscribe();
+      }
+
       const token = await getToken(messaging, {
         vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
+        serviceWorkerRegistration: swReg,
       });
 
       if (token) {
@@ -37,15 +47,37 @@ export function useNotifications() {
           createdAt: new Date().toISOString(),
           userAgent: navigator.userAgent,
         });
+        localStorage.setItem(LS_KEY, token);
         setSuscrito(true);
-        toast.success('¡Notificaciones activadas! Te avisaremos de todas las novedades.', {
-          icon: '🏖️',
-          duration: 4000,
-        });
+        toast.success('¡Notificaciones activadas!', { icon: '🏖️', duration: 4000 });
       }
     } catch (err) {
-      console.error('Error al suscribirse a notificaciones:', err);
+      console.error('Error al suscribirse:', err);
       toast.error('No se pudo activar las notificaciones. Inténtalo de nuevo.');
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  const desuscribirse = async () => {
+    const messaging = await messagingPromise;
+    setCargando(true);
+    try {
+      const token = localStorage.getItem(LS_KEY);
+      if (token) {
+        await deleteDoc(doc(db, 'suscriptores', token)).catch(() => {});
+        if (messaging) await deleteToken(messaging).catch(() => {});
+        // Cancelar suscripción push del navegador
+        const swReg = await navigator.serviceWorker.ready;
+        const sub = await swReg.pushManager.getSubscription();
+        if (sub) await sub.unsubscribe();
+      }
+      localStorage.removeItem(LS_KEY);
+      setSuscrito(false);
+      toast('Notificaciones desactivadas.', { icon: '🔕' });
+    } catch (err) {
+      console.error('Error al desuscribirse:', err);
+      toast.error('Error al desactivar notificaciones.');
     } finally {
       setCargando(false);
     }
@@ -67,5 +99,5 @@ export function useNotifications() {
     return () => unsubscribe?.();
   }, []);
 
-  return { permiso, suscrito, cargando, suscribirse };
+  return { permiso, suscrito, cargando, suscribirse, desuscribirse };
 }

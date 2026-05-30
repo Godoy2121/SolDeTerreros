@@ -7,6 +7,7 @@ const STORAGE_KEY = 'notif-prompt-dismissed';
 
 export default function NotificationPrompt() {
   const { permiso, suscrito, cargando, suscribirse } = useNotifications();
+  // Ya suscrito y activo → no mostramos el banner
   const [visible, setVisible] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
