@@ -5,6 +5,14 @@ import { messagingPromise, db } from '../firebase';
 import toast from 'react-hot-toast';
 
 const LS_KEY = 'fcm_token';
+const FCM_SW = '/firebase-messaging-sw.js';
+
+async function getFcmSwReg() {
+  // Registrar siempre el SW de FCM explícitamente para no mezclar con el SW del PWA
+  const reg = await navigator.serviceWorker.register(FCM_SW);
+  await navigator.serviceWorker.ready;
+  return reg;
+}
 
 export function useNotifications() {
   const [permiso, setPermiso] = useState(
@@ -29,16 +37,16 @@ export function useNotifications() {
         return;
       }
 
+      // Usar siempre el SW de FCM específico (no el del PWA)
+      const fswReg = await getFcmSwReg();
+
       // Cancelar suscripción push anterior para evitar conflicto de VAPID key
-      const swReg = await navigator.serviceWorker.ready;
-      const subAnterior = await swReg.pushManager.getSubscription();
-      if (subAnterior) {
-        await subAnterior.unsubscribe();
-      }
+      const subAnterior = await fswReg.pushManager.getSubscription();
+      if (subAnterior) await subAnterior.unsubscribe();
 
       const token = await getToken(messaging, {
         vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
-        serviceWorkerRegistration: swReg,
+        serviceWorkerRegistration: fswReg,
       });
 
       if (token) {
@@ -67,9 +75,8 @@ export function useNotifications() {
       if (token) {
         await deleteDoc(doc(db, 'suscriptores', token)).catch(() => {});
         if (messaging) await deleteToken(messaging).catch(() => {});
-        // Cancelar suscripción push del navegador
-        const swReg = await navigator.serviceWorker.ready;
-        const sub = await swReg.pushManager.getSubscription();
+        const fswReg = await getFcmSwReg();
+        const sub = await fswReg.pushManager.getSubscription();
         if (sub) await sub.unsubscribe();
       }
       localStorage.removeItem(LS_KEY);
@@ -77,7 +84,6 @@ export function useNotifications() {
       toast('Notificaciones desactivadas.', { icon: '🔕' });
     } catch (err) {
       console.error('Error al desuscribirse:', err);
-      toast.error('Error al desactivar notificaciones.');
     } finally {
       setCargando(false);
     }

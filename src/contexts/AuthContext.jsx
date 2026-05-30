@@ -1,5 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
+import {
+  onAuthStateChanged, signInWithPopup, GoogleAuthProvider,
+  signOut, setPersistence, browserSessionPersistence,
+} from 'firebase/auth';
 import { auth } from '../firebase';
 
 const AuthContext = createContext(null);
@@ -9,11 +12,16 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(undefined);
 
   useEffect(() => {
+    // Sesión de solo navegador: se cierra al cerrar el navegador/pestaña
+    setPersistence(auth, browserSessionPersistence).catch(() => {});
     const unsub = onAuthStateChanged(auth, setUser);
     return unsub;
   }, []);
 
-  const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
+  const loginWithGoogle = () =>
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => signInWithPopup(auth, googleProvider));
+
   const logout = () => signOut(auth);
 
   return (

@@ -1,5 +1,33 @@
-import { NavLink } from 'react-router-dom';
+import { useRef } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Sun, Waves, UtensilsCrossed, CalendarDays, Map, Heart, Camera, Share2, Compass, Phone } from 'lucide-react';
+
+function HiddenAdminTrigger() {
+  const navigate = useNavigate();
+  const tapsRef = useRef(0);
+  const timerRef = useRef(null);
+
+  const handleTap = () => {
+    tapsRef.current += 1;
+    clearTimeout(timerRef.current);
+    if (tapsRef.current >= 7) {
+      tapsRef.current = 0;
+      navigate('/admin');
+      return;
+    }
+    timerRef.current = setTimeout(() => { tapsRef.current = 0; }, 2000);
+  };
+
+  return (
+    <div
+      onClick={handleTap}
+      className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center cursor-pointer select-none"
+      aria-hidden="true"
+    >
+      <Sun className="w-5 h-5 text-white" />
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
@@ -9,9 +37,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
-                <Sun className="w-5 h-5 text-white" />
-              </div>
+              <HiddenAdminTrigger />
               <span className="font-bold text-lg font-display">Sol de Terreros</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
