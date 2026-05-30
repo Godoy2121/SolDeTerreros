@@ -399,7 +399,58 @@ export const restaurantes = [
     abierto: true,
     web: "https://www.laconsentiaterreros.es",
     tags: ["pizzería", "horno de leña", "pasta", "terraza", "Mar de Pulpí"],
-    carta: { categorias: [] }
+    carta: {
+      categorias: [
+        {
+          nombre: "Pizzas",
+          icono: "🍕",
+          platos: [
+            { nombre: "Margherita", precio: 9.50, descripcion: "Tomate y mozzarella." },
+            { nombre: "Quattro formaggi", precio: 13.50, descripcion: "Cuatro quesos." },
+            { nombre: "Diavola", precio: 12.00, descripcion: "Salami picante." },
+            { nombre: "Vegetal", precio: 12.00, descripcion: "Verduras de temporada." },
+            { nombre: "Especialidad de la casa", precio: 16.50, descripcion: "La firma del chef.", popular: true }
+          ]
+        },
+        {
+          nombre: "Pasta y Risotto",
+          icono: "🍝",
+          platos: [
+            { nombre: "Lasaña", precio: 12.00, descripcion: "Lasaña clásica al horno." },
+            { nombre: "Gnocchi", precio: 13.00, descripcion: "Con salsa a elegir." },
+            { nombre: "Risotto del día", precio: 14.50, descripcion: "Según disponibilidad.", popular: true },
+            { nombre: "Risotto de setas y trufa", precio: 19.50, descripcion: "Con trufa negra rallada." }
+          ]
+        },
+        {
+          nombre: "Carnes y Pescados",
+          icono: "🥩",
+          platos: [
+            { nombre: "Costillas BBQ", precio: 18.00, descripcion: "Costillas a la brasa con salsa BBQ.", popular: true },
+            { nombre: "Chuletillas de cordero", precio: 22.00, descripcion: "A la parrilla con romero." },
+            { nombre: "Solomillo a la plancha", precio: 27.50, descripcion: "Con guarnición." },
+            { nombre: "Salmón relleno", precio: 20.50, descripcion: "Relleno de puerros y gambas." }
+          ]
+        },
+        {
+          nombre: "Ensaladas",
+          icono: "🥗",
+          platos: [
+            { nombre: "Ensalada La Consentía", precio: 13.00, descripcion: "Especialidad de la casa.", popular: true },
+            { nombre: "Ensalada César", precio: 11.00, descripcion: "Con pollo crujiente y parmesano." },
+            { nombre: "Ensalada griega", precio: 10.00, descripcion: "Con queso feta y aceitunas." }
+          ]
+        },
+        {
+          nombre: "Postres",
+          icono: "🍮",
+          platos: [
+            { nombre: "Tarta del día", precio: 5.50, descripcion: "Consultar disponibilidad." },
+            { nombre: "Mousse de chocolate", precio: 5.50, descripcion: "Elaboración propia." }
+          ]
+        }
+      ]
+    }
   },
   {
     id: "la-entrevista",
