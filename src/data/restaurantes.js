@@ -10,11 +10,103 @@ export const restaurantes = [
     telefono: "+34 950 466 180",
     direccion: "Av. Puerta Litoral Andaluz, 133",
     foto: "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=900&q=85",
-    lat: 37.3553,
-    lng: -1.6725,
+    lat: 37.360168,
+    lng: -1.664801,
     abierto: true,
+    web: "https://mesonpepa.es",
     tags: ["cocina tradicional", "mariscos", "tapas", "familiar", "veterano"],
-    carta: { categorias: [] }
+    carta: {
+            "categorias": [
+                    {
+                            "nombre": "Hamburguesas",
+                            "icono": "🍔",
+                            "platos": [
+                                    {
+                                            "nombre": "Hamburguesa de ternera casera",
+                                            "precio": 7.5,
+                                            "descripcion": "Carne de ternera 100% casera.",
+                                            "popular": true
+                                    },
+                                    {
+                                            "nombre": "Hamburguesa",
+                                            "precio": 4,
+                                            "descripcion": ""
+                                    },
+                                    {
+                                            "nombre": "Hamburguesa con queso",
+                                            "precio": 4.5,
+                                            "descripcion": ""
+                                    },
+                                    {
+                                            "nombre": "Hamburguesa TexMex",
+                                            "precio": 5,
+                                            "descripcion": "Al estilo tex-mex."
+                                    }
+                            ]
+                    },
+                    {
+                            "nombre": "Lasaña",
+                            "icono": "🫕",
+                            "platos": [
+                                    {
+                                            "nombre": "Lasaña XL",
+                                            "precio": 12.5,
+                                            "descripcion": "Lasaña casera, tamaño grande.",
+                                            "popular": true
+                                    },
+                                    {
+                                            "nombre": "Lasaña M",
+                                            "precio": 8.5,
+                                            "descripcion": "Lasaña casera, tamaño mediano."
+                                    }
+                            ]
+                    },
+                    {
+                            "nombre": "Platos principales",
+                            "icono": "🍽️",
+                            "platos": [
+                                    {
+                                            "nombre": "Estofado de ternera (Rundsstoofvlees)",
+                                            "precio": 18,
+                                            "descripcion": "Receta belga tradicional de estofado de ternera.",
+                                            "popular": true
+                                    },
+                                    {
+                                            "nombre": "Salade Neptuno",
+                                            "precio": 17.5,
+                                            "descripcion": "Ensalada con salmón ahumado y gambas."
+                                    }
+                            ]
+                    },
+                    {
+                            "nombre": "Pastas",
+                            "icono": "🍝",
+                            "platos": [
+                                    {
+                                            "nombre": "Spaghetti Bolognaise (regular)",
+                                            "precio": 12.5,
+                                            "descripcion": ""
+                                    },
+                                    {
+                                            "nombre": "Spaghetti Bolognaise (pequeña)",
+                                            "precio": 8.5,
+                                            "descripcion": ""
+                                    },
+                                    {
+                                            "nombre": "Pasta Chicken Pesto (regular)",
+                                            "precio": 12.5,
+                                            "descripcion": "Pasta con pollo y salsa pesto.",
+                                            "popular": true
+                                    },
+                                    {
+                                            "nombre": "Pasta Chicken Pesto (pequeña)",
+                                            "precio": 8.5,
+                                            "descripcion": ""
+                                    }
+                            ]
+                    }
+            ]
+    }
   },
   {
     id: "asador-castillo",
@@ -27,8 +119,8 @@ export const restaurantes = [
     telefono: "+34 950 099 124",
     direccion: "Calle Linares, San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85",
-    lat: 37.3548,
-    lng: -1.6718,
+    lat: 37.3608,
+    lng: -1.6628,
     abierto: true,
     tags: ["carnes a la parrilla", "vistas al mar", "pescados", "parrillada"],
     carta: { categorias: [] }
@@ -44,8 +136,8 @@ export const restaurantes = [
     telefono: "+34 637 817 991",
     direccion: "Av. Puerta Litoral Andaluz, S/N",
     foto: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=900&q=85",
-    lat: 37.3546,
-    lng: -1.6728,
+    lat: 37.3601,
+    lng: -1.6638,
     abierto: true,
     tags: ["paseo marítimo", "cocktails", "música", "tapas"],
     carta: { categorias: [] }
@@ -61,7 +153,7 @@ export const restaurantes = [
     telefono: "+34 605 865 620",
     direccion: "Paseo Marítimo de San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=900&q=85",
-    lat: 37.3548,
+    lat: 37.3578,
     lng: -1.6706,
     abierto: true,
     tags: ["paellas", "pulpo", "marisco", "cocina marinera"],
@@ -100,7 +192,7 @@ export const restaurantes = [
     direccion: "C. Viena, 2, San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=900&q=85",
     lat: 37.3335,
-    lng: -1.6920,
+    lng: -1.692,
     abierto: true,
     tags: ["Los Nardos", "marisco", "arroces", "playa"],
     carta: { categorias: [] }
@@ -116,8 +208,8 @@ export const restaurantes = [
     telefono: "+34 600 254 314",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1574096079513-d8259312b785?w=900&q=85",
-    lat: 37.3558,
-    lng: -1.6737,
+    lat: 37.3601,
+    lng: -1.6649,
     abierto: true,
     tags: ["música en vivo", "arroces", "ambiente nocturno", "terraza"],
     carta: { categorias: [] }
@@ -133,8 +225,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=900&q=85",
-    lat: 37.3552,
-    lng: -1.6740,
+    lat: 37.3599,
+    lng: -1.6651,
     abierto: false,
     tags: ["pub", "cervezas", "copas", "fútbol", "noche"],
     carta: { categorias: [] }
@@ -150,8 +242,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=900&q=85",
-    lat: 37.3550,
-    lng: -1.6725,
+    lat: 37.3601,
+    lng: -1.6641,
     abierto: true,
     tags: ["italiano", "pizza", "pasta", "horno de leña"],
     carta: {
@@ -187,8 +279,8 @@ export const restaurantes = [
     telefono: "+34 683 379 879",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=900&q=85",
-    lat: 37.3549,
-    lng: -1.6732,
+    lat: 37.36,
+    lng: -1.6643,
     abierto: true,
     tags: ["pizza", "cocina variada", "familiar"],
     carta: { categorias: [] }
@@ -204,8 +296,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "Av. Puerta del Litoral Andaluz, 23",
     foto: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85",
-    lat: 37.3554,
-    lng: -1.6748,
+    lat: 37.3608,
+    lng: -1.659,
     abierto: false,
     tags: ["francesa", "cocina elaborada", "romántico", "vinos"],
     carta: { categorias: [] }
@@ -221,8 +313,8 @@ export const restaurantes = [
     telefono: "+34 950 466 199",
     direccion: "Calle La Venta, 20",
     foto: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=900&q=85",
-    lat: 37.3553,
-    lng: -1.6730,
+    lat: 37.3604,
+    lng: -1.6645,
     abierto: true,
     tags: ["helados artesanos", "granizados", "local histórico"],
     carta: {
@@ -251,8 +343,8 @@ export const restaurantes = [
     telefono: "+34 667 695 871",
     direccion: "Calle Delfín, 9",
     foto: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=900&q=85",
-    lat: 37.3550,
-    lng: -1.6734,
+    lat: 37.3599,
+    lng: -1.6651,
     abierto: true,
     tags: ["helados", "granizados", "polos", "clásico"],
     carta: { categorias: [] }
@@ -285,8 +377,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85",
-    lat: 37.3556,
-    lng: -1.6755,
+    lat: 37.3605,
+    lng: -1.666,
     abierto: true,
     tags: ["arroces", "paella", "pescados", "vistas al mar", "terraza"],
     carta: { categorias: [] }
@@ -305,6 +397,7 @@ export const restaurantes = [
     lat: 37.3337,
     lng: -1.6918,
     abierto: true,
+    web: "https://www.laconsentiaterreros.es",
     tags: ["pizzería", "horno de leña", "pasta", "terraza", "Mar de Pulpí"],
     carta: { categorias: [] }
   },
@@ -319,8 +412,8 @@ export const restaurantes = [
     telefono: "+34 664 623 629",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=900&q=85",
-    lat: 37.3554,
-    lng: -1.6735,
+    lat: 37.3602,
+    lng: -1.6647,
     abierto: true,
     tags: ["pescado fresco", "marisco", "tradicional", "familiar"],
     carta: { categorias: [] }
@@ -336,8 +429,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "Canal Náutico, San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=900&q=85",
-    lat: 37.3557,
-    lng: -1.6782,
+    lat: 37.3601,
+    lng: -1.665,
     abierto: true,
     tags: ["náutico", "vistas al canal", "ambiente tranquilo"],
     carta: { categorias: [] }
@@ -353,8 +446,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "Playa de Los Terreros",
     foto: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=85",
-    lat: 37.3545,
-    lng: -1.6758,
+    lat: 37.3553,
+    lng: -1.674,
     abierto: true,
     tags: ["fritura", "helados", "primera línea", "clásico"],
     carta: { categorias: [] }
@@ -370,8 +463,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=900&q=85",
-    lat: 37.3553,
-    lng: -1.6750,
+    lat: 37.3602,
+    lng: -1.6654,
     abierto: true,
     tags: ["cocina casera", "desayunos", "tapas", "tradicional"],
     carta: { categorias: [] }
@@ -387,9 +480,10 @@ export const restaurantes = [
     telefono: "",
     direccion: "Puerta Litoral Andaluz, 349",
     foto: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85",
-    lat: 37.3480,
-    lng: -1.6825,
+    lat: 37.3572,
+    lng: -1.6718,
     abierto: true,
+    web: "https://restaurantegemva.com",
     tags: ["pulpo", "solomillo", "mediterránea", "familiar", "Traveler's Choice"],
     carta: { categorias: [] }
   },
@@ -404,8 +498,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1574096079513-d8259312b785?w=900&q=85",
-    lat: 37.3554,
-    lng: -1.6742,
+    lat: 37.3602,
+    lng: -1.6648,
     abierto: true,
     tags: ["tapas", "pinchos", "raciones", "céntrico"],
     carta: { categorias: [] }
@@ -421,11 +515,51 @@ export const restaurantes = [
     telefono: "+34 636 031 989",
     direccion: "Av. Puerta Litoral Andaluz, 11 D, San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=900&q=85",
-    lat: 37.3552,
-    lng: -1.6750,
+    lat: 37.3608,
+    lng: -1.6587,
     abierto: true,
+    web: "https://www.anniesbistro.eu",
     tags: ["belga", "cervezas importadas", "lasaña casera", "tapas", "europeo"],
-    carta: { categorias: [] }
+    carta: {
+      categorias: [
+        {
+          nombre: "Hamburguesas",
+          icono: "🍔",
+          platos: [
+            { nombre: "Hamburguesa de ternera casera", precio: 7.50, descripcion: "Carne de ternera 100% casera.", popular: true },
+            { nombre: "Hamburguesa", precio: 4.00, descripcion: "" },
+            { nombre: "Hamburguesa con queso", precio: 4.50, descripcion: "" },
+            { nombre: "Hamburguesa TexMex", precio: 5.00, descripcion: "Al estilo tex-mex." }
+          ]
+        },
+        {
+          nombre: "Lasaña",
+          icono: "🫕",
+          platos: [
+            { nombre: "Lasaña XL", precio: 12.50, descripcion: "Lasaña casera, tamaño grande.", popular: true },
+            { nombre: "Lasaña M", precio: 8.50, descripcion: "Lasaña casera, tamaño mediano." }
+          ]
+        },
+        {
+          nombre: "Platos principales",
+          icono: "🍽️",
+          platos: [
+            { nombre: "Estofado de ternera belga (Rundsstoofvlees)", precio: 18.00, descripcion: "Receta clásica belga.", popular: true },
+            { nombre: "Salade Neptuno", precio: 17.50, descripcion: "Ensalada con salmón ahumado y gambas." }
+          ]
+        },
+        {
+          nombre: "Pastas",
+          icono: "🍝",
+          platos: [
+            { nombre: "Spaghetti Bolognaise", precio: 12.50, descripcion: "Tamaño regular." },
+            { nombre: "Spaghetti Bolognaise (pequeña)", precio: 8.50, descripcion: "" },
+            { nombre: "Pasta Chicken Pesto", precio: 12.50, descripcion: "Pasta con pollo y salsa pesto.", popular: true },
+            { nombre: "Pasta Chicken Pesto (pequeña)", precio: 8.50, descripcion: "" }
+          ]
+        }
+      ]
+    }
   },
   // ── COMIDA PARA LLEVAR ──
   {
@@ -584,8 +718,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85",
-    lat: 37.3557,
-    lng: -1.6736,
+    lat: 37.3603,
+    lng: -1.6646,
     abierto: true,
     tags: ["cocina casera", "mediterránea", "acogedor", "muy valorado"],
     carta: { categorias: [] }
@@ -601,8 +735,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=900&q=85",
-    lat: 37.3551,
-    lng: -1.6728,
+    lat: 37.3601,
+    lng: -1.6643,
     abierto: true,
     tags: ["cocina india", "tandoori", "curry", "especias", "internacional"],
     carta: { categorias: [] }
@@ -618,8 +752,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "San Juan de los Terreros (ubicación variable)",
     foto: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=900&q=85",
-    lat: 37.3555,
-    lng: -1.6731,
+    lat: 37.3602,
+    lng: -1.6647,
     abierto: true,
     tags: ["food truck", "fusión", "original", "verano"],
     carta: { categorias: [] }
@@ -635,8 +769,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "Pistas de Padel, San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1574096079513-d8259312b785?w=900&q=85",
-    lat: 37.3570,
-    lng: -1.6762,
+    lat: 37.3625,
+    lng: -1.6625,
     abierto: true,
     tags: ["padel", "tapas", "bocadillos", "deportivo", "familiar"],
     carta: { categorias: [] }
@@ -652,8 +786,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "Paseo Marítimo, San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=85",
-    lat: 37.3560,
-    lng: -1.6755,
+    lat: 37.3597,
+    lng: -1.6635,
     abierto: true,
     tags: ["kiosco", "vistas a la bahía", "helados", "cervezas", "paseo"],
     carta: { categorias: [] }
@@ -669,8 +803,8 @@ export const restaurantes = [
     telefono: "",
     direccion: "San Juan de los Terreros",
     foto: "https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=900&q=85",
-    lat: 37.3554,
-    lng: -1.6744,
+    lat: 37.3601,
+    lng: -1.6652,
     abierto: false,
     tags: ["bar", "copas", "música", "noche", "ambiente"],
     carta: { categorias: [] }
@@ -686,9 +820,10 @@ export const restaurantes = [
     telefono: "",
     direccion: "Av. Puerta Litoral Andaluz, 6",
     foto: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=85",
-    lat: 37.3551,
-    lng: -1.6752,
+    lat: 37.3608,
+    lng: -1.6583,
     abierto: true,
+    web: "https://dulchegustoterreros.es",
     tags: ["desayunos", "bollería", "helados", "conciertos", "terraza", "vistas al mar"],
     carta: {
       categorias: [

@@ -16,7 +16,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
 });
 
-const CENTRO = [37.3553, -1.6740];
+const CENTRO = [37.3601, -1.6648];
 
 function calcDistancia(lat1, lng1, lat2, lng2) {
   const R = 6371000;

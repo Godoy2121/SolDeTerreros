@@ -16,7 +16,7 @@ function WeatherWidget() {
 
   useEffect(() => {
     fetch(
-      'https://api.open-meteo.com/v1/forecast?latitude=37.545&longitude=-1.700&current_weather=true&hourly=relative_humidity_2m,wind_speed_10m&timezone=Europe%2FMadrid&forecast_days=1'
+      'https://api.open-meteo.com/v1/forecast?latitude=37.3601&longitude=-1.6648&current_weather=true&hourly=relative_humidity_2m,wind_speed_10m&timezone=Europe%2FMadrid&forecast_days=1'
     )
       .then(r => r.json())
       .then(data => {
@@ -158,7 +158,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-end pb-16 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=90')" }}
+          style={{ backgroundImage: "url('/pichirichi.jpg')" }}
         />
         <div className="absolute inset-0 hero-gradient" />
         <div className="absolute inset-0 bg-gradient-to-b from-sky-900/30 to-slate-900/70" />

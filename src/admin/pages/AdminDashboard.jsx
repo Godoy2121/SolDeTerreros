@@ -11,7 +11,7 @@ import { useRestaurantes } from '../../hooks/useRestaurantes';
 import { useEventos } from '../../hooks/useEventos';
 import toast from 'react-hot-toast';
 
-const APP_VERSION = '1.0.1';
+const APP_VERSION = '1.0.2';
 
 async function seedCollection(collectionName, items) {
   const batch = writeBatch(db);

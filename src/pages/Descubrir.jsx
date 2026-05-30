@@ -30,7 +30,7 @@ const lugares = [
     emoji: "🏰",
     tipo: "Patrimonio histórico",
     descripcion: "Construido en 1764 por orden de Carlos III como defensa costera contra piratas y corsarios berberiscos. Desde su promontorio se divisa gran parte del litoral almeriense y murciano en días claros. Acceso libre y gratuito, con las mejores vistas del pueblo.",
-    foto: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85",
+    foto: "https://upload.wikimedia.org/wikipedia/commons/5/5f/CastilloTerreros_%28cropped%29.JPG",
     datos: ["Construido en 1764", "Época de Carlos III", "Defensa anti-piratas", "Mirador de acceso libre"],
     badge: "Patrimonio siglo XVIII",
     badgeColor: "bg-amber-100 text-amber-700",
@@ -250,6 +250,41 @@ export default function Descubrir() {
               </motion.div>
             ))}
           </div>
+        </section>
+
+        {/* El Pichirichi */}
+        <section>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative rounded-3xl overflow-hidden"
+          >
+            <img
+              src="/pichirichi.jpg"
+              alt="El Pichirichi - San Juan de los Terreros"
+              className="w-full h-72 sm:h-96 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+              <span className="inline-block bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">
+                🌋 Icono de Los Terreros
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white font-display mb-2">El Pichirichi</h2>
+              <p className="text-white/85 text-sm sm:text-base max-w-2xl leading-relaxed">
+                La roca volcánica más fotografiada de Los Terreros. Emerge del mar entre el Mar Rabiosa y el Mar Serena,
+                formando la frontera natural entre las dos calas. Origen volcánico, forma única y vistas que cortan la respiración.
+                El símbolo inconfundible del pueblo.
+              </p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {["Roca volcánica", "Entre Mar Rabiosa y La Serena", "Mirador natural", "Punto de buceo"].map(d => (
+                  <span key={d} className="text-xs bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-2.5 py-1 text-white">
+                    {d}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </section>
 
         {/* Buceo destacado */}

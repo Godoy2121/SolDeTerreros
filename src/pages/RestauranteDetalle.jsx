@@ -178,6 +178,14 @@ export default function RestauranteDetalle() {
               </a>
             </div>
           )}
+          {restaurante.web && (
+            <div className="flex items-center gap-3 p-4">
+              <ExternalLink className="w-4 h-4 text-gray-400" />
+              <a href={restaurante.web} target="_blank" rel="noopener noreferrer" className="text-sm text-sky-600 font-medium hover:underline truncate">
+                {restaurante.web.replace(/^https?:\/\/(www\.)?/, '')}
+              </a>
+            </div>
+          )}
         </motion.div>
 
         <p className="text-gray-600 mb-6 leading-relaxed">{restaurante.descripcion}</p>
